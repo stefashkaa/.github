@@ -1,0 +1,20 @@
+name: Generate CRT Contribution SVG
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate & push SVGs
+        uses: stefashkaa/github-profile-crt@v1
+        with:
+          output-dir: assets
+          themes: winamp
