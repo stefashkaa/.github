@@ -13,8 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
       - name: Generate & push SVGs
         uses: stefashkaa/github-profile-crt@v1
         with:
           output-dir: assets
           themes: winamp
+          commit-and-push: false
+
+      - name: Commit & push SVGs
+        run: |
+          git config user.name "stefashkaa"
+          git config user.email "stef4n.popov@gmail.com"
+          git add -- assets
+          git diff --cached --quiet || git commit -m "chore: Update CRT contribution SVGs"
+          git push origin main
